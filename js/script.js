@@ -1,10 +1,12 @@
-import { services, responsiveServices } from './services.js';
+import { services, responsiveServices } from '../data/services.js';
+import { goals } from '../data/goals.js';
 // Targeting the elements
 const carousel_inner = document.querySelector('.carousel-inner');
 const carousel_control = document.querySelector('.carousel-indicators');
 const navbar = document.querySelector('nav');
 const imageLogo = document.querySelector('.logo');
 const imagesSlider = document.querySelectorAll('.back');
+const goalsSection = document.querySelector('.goals');
 
 // Implement the image slider
 const slider = (index) => {
@@ -207,6 +209,35 @@ const setResponsiveData = (serv) => {
 	});
 };
 
+const setGoalsContent = () => {
+	goals.forEach((goal) => {
+		let content = `
+				<div class="goal d-flex flex-column align-items-center gap-2" data-id="${goal.id}">
+					<span>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="50"
+							height="50"
+							fill="#c49a6c"
+							class="bi bi-bullseye"
+							viewBox="0 0 16 16">
+							<path
+								d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+							<path
+								d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10zm0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
+							<path
+								d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
+							<path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+						</svg>
+					</span>
+					<p class="text-white text-center">
+						${goal.text}
+					</p>
+				</div>`;
+		goalsSection.innerHTML += content;
+	});
+};
+
 const scrollThreshold = 150;
 const styleNavbar = () => {
 	const scrollY = window.scrollY;
@@ -231,8 +262,29 @@ const setChosenService = () => {
 };
 window.onload = () => {
 	setChosenService();
+	setGoalsContent();
 };
 window.onresize = () => {
 	setChosenService();
 };
 window.addEventListener('scroll', styleNavbar);
+
+// Add a click event listener to all navigation links
+document.querySelectorAll('nav a').forEach((anchor) => {
+	anchor.addEventListener('click', function (e) {
+		e.preventDefault();
+
+		const targetId = this.getAttribute('href').substring(1);
+		const targetSection = document.getElementById(targetId);
+
+		if (targetSection) {
+			const offsetTop =
+				targetSection.getBoundingClientRect().top + (window.scrollY - 110);
+
+			window.scrollTo({
+				top: offsetTop,
+				behavior: 'smooth',
+			});
+		}
+	});
+});
