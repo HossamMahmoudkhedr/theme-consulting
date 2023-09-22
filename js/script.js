@@ -72,25 +72,31 @@ const createContent = (data) => {
 				        <div class="head">
 					        <span>
 						        <svg
-                                    width="50"
-                                    height="50"
-                                    viewBox="0 0 50 50"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g id="&#240;&#159;&#166;&#134; icon &#34;target&#34;">
-									<path
-                                            id="Vector"
-                                            d="M24.9065 0C11.2079 0 0 11.2079 0 24.9065C0 38.605 11.2079 49.8129 24.9065 49.8129C38.605 49.8129 49.8129 38.605 49.8129 24.9065C49.8129 11.2079 38.605 0 24.9065 0ZM24.9065 6.22661C35.2426 6.22661 43.5863 14.5703 43.5863 24.9065C43.5863 35.2426 35.2426 43.5863 24.9065 43.5863C14.5703 43.5863 6.22661 35.2426 6.22661 24.9065C6.22661 14.5703 14.5703 6.22661 24.9065 6.22661ZM24.9065 12.4532C18.0572 12.4532 12.4532 18.0572 12.4532 24.9065C12.4532 31.7557 18.0572 37.3597 24.9065 37.3597C31.7557 37.3597 37.3597 31.7557 37.3597 24.9065C37.3597 18.0572 31.7557 12.4532 24.9065 12.4532ZM24.9065 18.6798C28.3934 18.6798 31.1331 21.4196 31.1331 24.9065C31.1331 28.3934 28.3934 31.1331 24.9065 31.1331C21.4196 31.1331 18.6798 28.3934 18.6798 24.9065C18.6798 21.4196 21.4196 18.6798 24.9065 18.6798Z"
-                                            fill="#C49A6C"
-                                        />
-										</g>
-						        </svg>
+										xmlns="http://www.w3.org/2000/svg"
+										width="50"
+										height="50"
+										fill="#c49a6c"
+										class="bi bi-bullseye"
+										viewBox="0 0 16 16">
+										<path
+											d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+										<path
+											d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10zm0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
+										<path
+											d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
+										<path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+									</svg>
 					        </span>
 					        <h6>${data.title}</h6>
                         </div>
 				        <p>
 						${data.text}
 				        </p>
+						<a href="#">
+							<svg xmlns="http://www.w3.org/2000/svg" width="50" height="33" fill="#939393" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+</svg>
+						</a>
 			        </div>
         `;
 	return content;
@@ -98,11 +104,24 @@ const createContent = (data) => {
 // Create the image
 const createImage = (item) => {
 	const imageContainer = document.createElement('div');
+	let tirangle = `<span
+						><svg
+							width="54"
+							height="47"
+							viewBox="0 0 54 47"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M27 0L53.8468 46.5H0.153213L27 0Z"
+								fill="#F5F5F5" />
+						</svg>
+					</span>`;
 	imageContainer.classList.add('image');
 	const image = document.createElement('img');
 	image.src = item.img;
 	image.loading = 'lazy';
 	imageContainer.appendChild(image);
+	imageContainer.innerHTML += tirangle;
 	return imageContainer;
 };
 
@@ -121,7 +140,7 @@ const setData = (serv) => {
 		const innerData = createItem();
 
 		// add one more class to the item
-		innerData.classList.add('justify-content-end');
+		// innerData.classList.add('justify-content-end');
 
 		itemContainer.appendChild(innerData);
 		el.forEach((i, idx) => {
@@ -197,7 +216,7 @@ const styleNavbar = () => {
 		imageLogo.src = '../assets/images/image-removebg-preview 2.png';
 	} else {
 		navbar.classList.remove('scrolled');
-		imageLogo.src = '../assets/images/image-removebg-preview 1.png';
+		imageLogo.src = '../assets/icons/color-logo.svg';
 	}
 };
 

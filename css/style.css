@@ -32,7 +32,7 @@
 	width: 100%;
 }
 
-.container .left-section .image span {
+.image span {
 	display: block;
 	position: absolute;
 	left: -27px;
@@ -59,7 +59,7 @@ nav {
 	transform: scale(2);
 	width: 100%;
 	height: 100%;
-	transition: all 1s ease-in-out;
+	transition: all 2s ease-out;
 	object-fit: cover;
 }
 .container-fluid img.back.active {
@@ -206,6 +206,7 @@ nav.scrolled .contact-search {
 }
 
 .services .top-section .carousel .carousel-inner .image {
+	position: relative;
 	height: 300px;
 	margin-bottom: 42px;
 }
@@ -213,6 +214,7 @@ nav.scrolled .contact-search {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .services .head {
 	display: flex;
@@ -222,6 +224,7 @@ nav.scrolled .contact-search {
 .services .head h6 {
 	font-size: 20px;
 	font-weight: 800;
+	color: var(--heading);
 }
 
 .services .text {
@@ -234,6 +237,8 @@ nav.scrolled .contact-search {
 
 .services .text p {
 	font-weight: 400;
+	margin: 0;
+	height: 200px;
 }
 
 .services .item {
@@ -261,16 +266,33 @@ nav.scrolled .contact-search {
 }
 .goals {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	gap: 6rem 3rem;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 4rem 3rem;
 	width: 100%;
+	justify-items: center;
+}
+
+.goals > :last-child {
+	grid-column: 2;
+	grid-row: 3;
+}
+.goals .goal p {
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 500;
 }
 /* End of goals section */
 
 /* Start of solutions section */
 .solutions-section {
 	position: relative;
-	padding: 7rem;
+	padding: 10rem;
+}
+
+.solutions-section > span {
+	position: absolute;
+	top: 0;
+	right: 0;
 }
 
 .solutions .middel-circle {
@@ -410,23 +432,6 @@ footer .bottom-section p {
 	/* End of responsive solutions section */
 }
 
-@media (max-width: 768px) {
-	.goals {
-		gap: 2rem 3rem !important;
-	}
-	.goals.p-4 {
-		padding: 0rem !important;
-		padding-top: 1rem !important;
-	}
-
-	.goals .goal p {
-		font-size: 1rem !important;
-	}
-	.solutions-section .container {
-		transform: scale(0.8);
-	}
-}
-
 @media (max-width: 992px) {
 	/* start of responsive hero section */
 	button.navbar-toggler {
@@ -521,6 +526,23 @@ footer .bottom-section p {
 	}
 	/* End of responsive about us and vision sections */
 
+	/* Start of the goals section */
+	.goals {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.goals .goal p {
+		font-size: 1rem;
+	}
+	/* End of the goals section */
+	/* Start of soultion section */
+	.solutions-section {
+		padding: 7;
+	}
+	.solutions-section > span {
+		display: none;
+	}
+	/* End of soultion section */
 	/* Start of responsive footer section */
 	footer .container .top-section {
 		flex-direction: column;
@@ -537,11 +559,44 @@ footer .bottom-section p {
 	}
 	/* End of responsive footer section */
 }
+
+@media (max-width: 768px) {
+	.goals {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+	.goals.p-4 {
+		padding: 0rem !important;
+		padding-top: 1rem !important;
+	}
+
+	.goals .goal p {
+		font-size: 1rem !important;
+	}
+	.solutions-section .container {
+		transform: scale(0.8);
+	}
+	.services .container {
+		padding: 96px 0px 30px;
+	}
+}
 @media (max-width: 992px) {
 	/* Start of responsive services section */
 	.services .item {
 		width: 100% !important;
 	}
 	/* End of responsive services section */
+}
+
+@media (min-width: 1200px) {
+	.services .head h6 {
+		font-size: 18px;
+	}
+
+	.services .text p {
+		width: 277px;
+		height: 236px;
+	}
 }
 /* ******End of Media Query****** */
