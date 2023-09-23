@@ -15,6 +15,18 @@
 
 /* Start of the GENERAL STYLES */
 
+select {
+	background-image: none !important;
+	cursor: pointer;
+}
+
+select option {
+	cursor: pointer !important;
+}
+.form-select {
+	padding: 0.375rem 1rem 0.375rem 0.75rem !important;
+}
+
 .section-styling {
 	padding: 96px 126px 51px;
 }
@@ -482,7 +494,7 @@ footer .bottom-section p {
 	.res-nav.align-items-end {
 		align-items: center !important;
 	}
-	.nav-item a span svg path {
+	.nav-item span svg path {
 		fill: var(--footer-color) !important;
 	}
 	.navbar {

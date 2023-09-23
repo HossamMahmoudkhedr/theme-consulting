@@ -1,5 +1,6 @@
 import { services, responsiveServices } from '../data/services.js';
 import { goals } from '../data/goals.js';
+import { translatinos } from '../translations/translations.js';
 // Targeting the elements
 const carousel_inner = document.querySelector('.carousel-inner');
 const carousel_control = document.querySelector('.carousel-indicators');
@@ -89,10 +90,10 @@ const createContent = (data) => {
 										<path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
 									</svg>
 					        </span>
-					        <h6>${data.title}</h6>
+					        <h6 ">${document.dir === 'rtl' ? data.title : data.enTitle}</h6>
                         </div>
-				        <p>
-						${data.text}
+				        <p ">
+						${document.dir === 'rtl' ? data.text : data.enText}
 				        </p>
 						<a href="#">
 							<svg xmlns="http://www.w3.org/2000/svg" width="50" height="33" fill="#939393" class="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -230,7 +231,7 @@ const setGoalsContent = () => {
 							<path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
 						</svg>
 					</span>
-					<p class="text-white text-center">
+					<p class="text-white text-center" data-i18n="${goal.translateKey}">
 						${goal.text}
 					</p>
 				</div>`;
@@ -288,3 +289,47 @@ document.querySelectorAll('nav a').forEach((anchor) => {
 		}
 	});
 });
+
+const languageSelector = document.querySelector('select');
+
+languageSelector.addEventListener('change', (e) => {
+	setLanguage(e.target.value);
+	localStorage.setItem('lang', e.target.value);
+	setChosenService();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+	setLanguage(localStorage.getItem('lang'));
+});
+
+const setLanguage = (language) => {
+	const elements = document.querySelectorAll('[data-i18n]');
+	elements.forEach((element) => {
+		const translationKey = element.getAttribute('data-i18n');
+		element.textContent = translatinos[language][translationKey];
+	});
+	document.dir = language === 'ar' ? 'rtl' : 'ltr';
+	document.documentElement.lang = language;
+	languageSelector.value = language;
+
+	if (document.dir === 'ltr') {
+		if (window.innerWidth > 768)
+			document.querySelector('.solutions h2').style.width = 'fit-content';
+		document.querySelector('.solutions h2').style.height = '218px';
+		if (window.innerWidth <= 768) {
+			document.querySelector('.solutions h2').style.width = '150px';
+			document.querySelector('.solutions h2').style.height = '150px';
+			document.querySelector('.heading.text-white').style.marginTop = '3rem';
+		}
+	} else {
+		document.querySelector('.solutions h2').style.width = '150px';
+		document.querySelector('.solutions h2').style.height = '150px';
+		if (window.innerWidth <= 768) {
+			document.querySelector('.heading.text-white').style.marginTop = 'unset';
+		}
+	}
+};
+
+//  = () => {
+// 	createItem();
+// };
