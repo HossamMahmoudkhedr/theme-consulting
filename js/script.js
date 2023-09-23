@@ -8,13 +8,19 @@ const navbar = document.querySelector('nav');
 const imageLogo = document.querySelector('.logo');
 const imagesSlider = document.querySelectorAll('.back');
 const goalsSection = document.querySelector('.goals');
-
+const elements = document.querySelectorAll('[data-i18n]');
+const slogans = document.querySelectorAll('.slogan');
 // Implement the image slider
 const slider = (index) => {
 	imagesSlider.forEach((image) => {
 		image.classList.remove('active');
 	});
 	imagesSlider[index].classList.add('active');
+
+	slogans.forEach((slogan) => {
+		slogan.classList.remove('active');
+	});
+	slogans[index].classList.add('active');
 };
 let active = 0;
 setInterval(() => {
@@ -90,9 +96,9 @@ const createContent = (data) => {
 										<path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
 									</svg>
 					        </span>
-					        <h6 ">${document.dir === 'rtl' ? data.title : data.enTitle}</h6>
+					        <h6>${document.dir === 'rtl' ? data.title : data.enTitle}</h6>
                         </div>
-				        <p ">
+				        <p>
 						${document.dir === 'rtl' ? data.text : data.enText}
 				        </p>
 						<a href="#">
@@ -211,9 +217,12 @@ const setResponsiveData = (serv) => {
 };
 
 const setGoalsContent = () => {
+	goalsSection.innerHTML = '';
 	goals.forEach((goal) => {
 		let content = `
-				<div class="goal d-flex flex-column align-items-center gap-2" data-id="${goal.id}">
+				<div class="goal d-flex flex-column align-items-center gap-2" data-id="${
+					goal.id
+				}">
 					<span>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -231,8 +240,8 @@ const setGoalsContent = () => {
 							<path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
 						</svg>
 					</span>
-					<p class="text-white text-center" data-i18n="${goal.translateKey}">
-						${goal.text}
+					<p class="text-white text-center"">
+						${document.dir === 'rtl' ? goal.text : goal.enText}
 					</p>
 				</div>`;
 		goalsSection.innerHTML += content;
@@ -245,7 +254,7 @@ const styleNavbar = () => {
 
 	if (scrollY > scrollThreshold) {
 		navbar.classList.add('scrolled');
-		imageLogo.src = '../assets/images/image-removebg-preview 2.png';
+		imageLogo.src = '../assets/icons/Group-7.svg';
 	} else {
 		navbar.classList.remove('scrolled');
 		imageLogo.src = '../assets/icons/color-logo.svg';
@@ -296,6 +305,7 @@ languageSelector.addEventListener('change', (e) => {
 	setLanguage(e.target.value);
 	localStorage.setItem('lang', e.target.value);
 	setChosenService();
+	setGoalsContent();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -303,7 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const setLanguage = (language) => {
-	const elements = document.querySelectorAll('[data-i18n]');
 	elements.forEach((element) => {
 		const translationKey = element.getAttribute('data-i18n');
 		element.textContent = translatinos[language][translationKey];
@@ -311,25 +320,4 @@ const setLanguage = (language) => {
 	document.dir = language === 'ar' ? 'rtl' : 'ltr';
 	document.documentElement.lang = language;
 	languageSelector.value = language;
-
-	if (document.dir === 'ltr') {
-		if (window.innerWidth > 768)
-			document.querySelector('.solutions h2').style.width = 'fit-content';
-		document.querySelector('.solutions h2').style.height = '218px';
-		if (window.innerWidth <= 768) {
-			document.querySelector('.solutions h2').style.width = '150px';
-			document.querySelector('.solutions h2').style.height = '150px';
-			document.querySelector('.heading.text-white').style.marginTop = '3rem';
-		}
-	} else {
-		document.querySelector('.solutions h2').style.width = '150px';
-		document.querySelector('.solutions h2').style.height = '150px';
-		if (window.innerWidth <= 768) {
-			document.querySelector('.heading.text-white').style.marginTop = 'unset';
-		}
-	}
 };
-
-//  = () => {
-// 	createItem();
-// };
