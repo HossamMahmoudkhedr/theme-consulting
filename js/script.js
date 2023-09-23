@@ -248,7 +248,7 @@ const setGoalsContent = () => {
 		goalsSection.innerHTML += content;
 	});
 };
-
+// localStorage.clear();
 const scrollThreshold = 150;
 const styleNavbar = () => {
 	const scrollY = window.scrollY;
