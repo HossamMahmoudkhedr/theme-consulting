@@ -675,4 +675,10 @@ footer .bottom-section p {
 		width: fit-content;
 	}
 }
+
+@media (min-width: 1550px) {
+	.images-container.scrolled {
+		height: 94vh;
+	}
+}
 /* ******End of Media Query****** */

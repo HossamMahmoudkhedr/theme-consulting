@@ -10,6 +10,7 @@ const imagesSlider = document.querySelectorAll('.back');
 const goalsSection = document.querySelector('.goals');
 const elements = document.querySelectorAll('[data-i18n]');
 const slogans = document.querySelectorAll('.slogan');
+const imagesContainer = document.querySelector('.images-container');
 // Implement the image slider
 const slider = (index) => {
 	imagesSlider.forEach((image) => {
@@ -254,9 +255,11 @@ const styleNavbar = () => {
 
 	if (scrollY > scrollThreshold) {
 		navbar.classList.add('scrolled');
+		imagesContainer.classList.add('scrolled');
 		imageLogo.src = '../assets/icons/Group-7.svg';
 	} else {
 		navbar.classList.remove('scrolled');
+		imagesContainer.classList.remove('scrolled');
 		imageLogo.src = '../assets/icons/color-logo.svg';
 	}
 };
