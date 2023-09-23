@@ -669,11 +669,11 @@ footer .bottom-section p {
 	[dir='ltr'] .services .head {
 		height: 74px !important;
 	}
+}
 
-	[dir='ltr'] .services .text p {
-		height: 287px !important;
-		width: fit-content;
-	}
+[dir='ltr'] .services .text p {
+	height: 287px !important;
+	width: fit-content;
 }
 
 @media (min-width: 1550px) {
